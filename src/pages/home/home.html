@@ -1,0 +1,24 @@
+<ion-content class="bg">
+  <ion-card>
+    <ion-card-content>
+      <div class="bpklogo"></div>
+      <div style="text-align:center"><br>
+        <h1>
+          <ion-icon name="lock"></ion-icon>
+          <b>Employee Checkup Login</b>
+        </h1>
+      </div>
+      <br>
+      <form (submit)="CheckEmployee(EmpID.value)">
+        <ion-item>
+          <ion-label for="EmpID">Employee ID </ion-label>
+          <ion-input type="text" #EmpID aria-placeholder="รหัสพนักงาน" ></ion-input>
+        </ion-item>
+        <br>
+        <button ion-button block>
+          <ion-input type="submit" value="Login"></ion-input>
+        </button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

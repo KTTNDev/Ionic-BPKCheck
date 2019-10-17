@@ -1,0 +1,7 @@
+{
+  "name": "bpkhealthcheckup",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

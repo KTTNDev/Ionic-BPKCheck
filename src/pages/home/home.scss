@@ -1,0 +1,31 @@
+page-home {
+  .bpklogo{
+    position: relative;
+    height: 15vh;
+    background-image: url('../assets/img/bpklogo.png');
+    background-size: cover;
+  }
+  .bg {
+    background-image: url('../assets/img/wallpapers.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .scroll-content {
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  ion-card.card {
+    box-shadow: none;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    position: relative;
+  }
+  ion-item.item {
+    border-radius: 5px;
+  }
+}

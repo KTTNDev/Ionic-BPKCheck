@@ -1,0 +1,234 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <ion-icon name="person"></ion-icon>
+      {{person[4]}}
+    </ion-title>
+  </ion-navbar>
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="Menu">
+      <ion-segment-button value="Info">
+        Detail
+      </ion-segment-button>
+      
+      <ion-segment-button value="Chart">
+        Chart
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="bg">
+  <!-- Menu Info -->
+  <div [ngSwitch]="Menu">
+    <ion-list *ngSwitchCase="'Info'" padding>
+      <ion-item>
+        <b>รหัสพนักงาน
+          <ion-icon name="finger-print"></ion-icon>
+        </b>
+        <div style="text-align:center"> {{person[1]}}</div>
+      </ion-item>
+      <ion-item>
+        <b>ชื่อ
+          <ion-icon name="contact"></ion-icon>
+        </b>
+        <div style="text-align:center"> {{person[4]}}</div>
+      </ion-item>
+      <ion-item>
+        <b>HN
+          <ion-icon name="medkit"></ion-icon>
+        </b>
+        <div style="text-align:center"> {{person[0]}}</div>
+      </ion-item>
+      <ion-item>
+        <b>แผนก
+          <ion-icon name="eye"></ion-icon>
+        </b>
+        <div style="text-align:center"> {{person[5]}}</div>
+      </ion-item>
+      <!-- Card -->
+      <br>
+      <ion-item *ngFor="let labName of labNames; let i1 = index">
+        <div *ngFor="let Year of Years;let i2 = index">
+          <div *ngIf="i2 == 0">
+            <h4>
+              <b>{{labName}}</b>
+              <span class="value" *ngIf="i2 == 0">{{labDetail[i1][i2]}}</span>
+            </h4>
+          </div>
+          <ul>
+            <li *ngIf="i2 != 0">{{Year}} : {{labDetail[i1][i2]}}</li>
+          </ul>
+        </div>
+      </ion-item>
+    </ion-list>
+    <!-- End Menu Info -->
+    <ion-list *ngSwitchCase="'Chart'">
+      <ion-card>
+        <ion-card-header>
+          <b>Choleterol</b>
+        </ion-card-header>
+        <ion-card-content>
+          <div style="display: block;">
+            <canvas baseChart [datasets]="barChartData0" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors"
+              [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)">
+            </canvas>
+          </div>
+          <span>
+            *Cholesterol ค่าปริมาณไขมันในเส้นเลือด
+          </span>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <b>HDL</b>
+        </ion-card-header>
+        <ion-card-content>
+          <div style="display: block;">
+            <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors"
+              [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)">
+            </canvas>
+          </div>
+          <span>
+            *HDL ไขมันดี ได้มาจากการออกกำลังกาย
+          </span>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <b>LDL</b>
+        </ion-card-header>
+        <ion-card-content>
+          <div style="display: block;">
+            <canvas baseChart [datasets]="barChartData2" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors"
+              [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)">
+            </canvas>
+          </div>
+          <span>
+            *LDL ได้มาจากการกินอาหารที่ไม่ดี
+          </span>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <b>Triglyceride</b>
+        </ion-card-header>
+        <ion-card-content>
+          <div style="display: block;">
+            <canvas baseChart [datasets]="barChartData3" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors"
+              [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)">
+            </canvas>
+          </div>
+          <span>
+            *ไตรกลีเซอไรด์ (Triglycerides) สูงจะทำให้เกิดโรคหลอดเลือดหัวใจตีบ
+          </span>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <b>Glucose</b>
+        </ion-card-header>
+        <ion-card-content>
+          <div style="display: block;">
+            <canvas baseChart [datasets]="barChartData4" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors"
+              [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)">
+            </canvas>
+          </div>
+          <span>
+            *Glucose ค่าปริมาณน้ำตาลในเส้นเลือด
+          </span>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <b>Creatinine(plus eGFR)</b>
+        </ion-card-header>
+        <ion-card-content>
+          <div style="display: block;">
+            <canvas baseChart [datasets]="barChartData5" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors"
+              [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)">
+            </canvas>
+          </div>
+          <span>
+            *Creatinine เป็นของเสียที่เกิดจากกล้ามเนื้อ สาร Creatinine จะเกิดขึ้นทุกวัน
+          </span>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <b>Creatinine(SI Unit)</b>
+        </ion-card-header>
+        <ion-card-content>
+          <div style="display: block;">
+            <canvas baseChart [datasets]="barChartData6" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors"
+              [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)">
+            </canvas>
+          </div>
+          <span>
+            มีค่าคงที่ คือมีในปริมาณเท่าๆกันทุกวัน ในแต่ละคน ซึ่งสารนี้จะถูกขับออกจากร่างกายผ่านไต
+          </span>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <b>BMI</b>
+        </ion-card-header>
+        <ion-card-content>
+          <div style="display: block;">
+            <canvas baseChart [datasets]="barChartData7" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors"
+              [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)">
+            </canvas>
+          </div>
+          <span>
+            *BMI คือ มวลร่างกาย คำนวณจาก น้ำหนัก และ ส่วนสูง ตามสูตร (น้ำหนัก หารกับ ส่วนสูงหน่วยเป็นเมตร 2 ครั้ง เช่น หนัก 70 สูง 170
+            ก็ให้กดในเครื่องคิดเลข 70 หาร 1.70 หาร 1.70)
+          </span>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <b>B/P ตัวบน</b>
+        </ion-card-header>
+        <ion-card-content>
+          <div style="display: block;">
+            <canvas baseChart [datasets]="barChartData8" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors"
+              [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)">
+            </canvas>
+          </div>
+          <span>
+            *BP คือ ค่าความดันโลหิต ตัวบนไม่ควรเกิน 140 ถ้าค่าออกมา ว่า 140/90 แปลว่า มีความเสี่ยงความดันโลหิตสูง
+          </span>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <b>B/P ตัวบล่าง</b>
+        </ion-card-header>
+        <ion-card-content>
+          <div style="display: block;">
+            <canvas baseChart [datasets]="barChartData9" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors"
+              [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)">
+            </canvas>
+          </div>
+          <span>
+            *BP คือ ค่าความดันโลหิต ตัวล่างไม่ควรเกิน 90 ถ้าค่าออกมา 90/50 อันนี้ คือความดันโลหิตต่ำ
+          </span>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+          <ion-card-header>
+            <b>เพิ่ม</b>
+          </ion-card-header>
+          <ion-card-content>
+            <div style="display: block;">
+              <canvas baseChart [datasets]="barChartData10" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors"
+                [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)">
+              </canvas>
+            </div>
+            <span>
+              *เพิ่ม
+            </span>
+          </ion-card-content>
+        </ion-card>
+    </ion-list>
+  </div>
+</ion-content>
